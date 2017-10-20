@@ -11,7 +11,7 @@ Tips
 ----
 
 * Before import any data with this library, test between five and ten lines of your csv file with the Odoo wizard, to make it sure work.
-* To increase performance, set your Odoo to run with workers according yours server configurations
+* To increase performance, set your Odoo to run with workers. More information in https://www.odoo.com/documentation/10.0/setup/deploy.html
 * To more informations about how to import large data into Odoo, access https://www.odoo.com/pt_BR/slides/slide/how-to-import-large-complex-data-into-odoo-455/pdf_content
 
 How to use
