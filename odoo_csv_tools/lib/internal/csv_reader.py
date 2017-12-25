@@ -53,7 +53,8 @@ class UnicodeWriter:
 
     def writerow(self, row):
         self.lock.acquire()
-        self.writer.writerow([str(s) if isinstance(s, bool) else s.encode("utf-8") for s in row])
+        values = ['' if isinstance(s, bool) else s.encode("utf-8") for s in row]
+        self.writer.writerow(values)
         # Fetch UTF-8 output from the queue ...
         data = self.queue.getvalue()
         data = data.decode("utf-8")
