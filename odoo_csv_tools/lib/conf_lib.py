@@ -1,11 +1,11 @@
-import openerplib
-import ConfigParser
+import odoolib
+import configparser
 import logging
 import sys
 
 
 def get_server_connection(config_file):
-    config = ConfigParser.RawConfigParser({'protocol' : 'xmlrpc', 'port' : 8069})
+    config = configparser.RawConfigParser({'protocol' : 'xmlrpc', 'port' : 8069})
     config.read(config_file)
 
     hostname = config.get('Connection', 'hostname')
@@ -15,7 +15,7 @@ def get_server_connection(config_file):
     protocol = config.get('Connection', 'protocol')
     port = int(config.get('Connection', 'port'))
     uid = int(config.get('Connection', 'uid'))
-    return openerplib.get_connection(hostname=hostname, database=database, login=login, password=password, protocol=protocol, port=port, user_id=uid)
+    return odoolib.get_connection(hostname=hostname, database=database, login=login, password=password, protocol=protocol, port=port, user_id=uid)
 
 def init_logger():
     logger_err = logging.getLogger("error")

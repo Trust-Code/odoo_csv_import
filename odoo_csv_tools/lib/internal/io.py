@@ -6,12 +6,13 @@ Created on 10 sept. 2016
 import csv
 import os
 
-from csv_reader import UnicodeWriter, UnicodeReader
+# from csv_reader import UnicodeWriter, UnicodeReader
+
 
 
 def write_csv(filename, header, data):
     file_result = open(filename, "wb")
-    c = UnicodeWriter(file_result, delimiter=';', quoting=csv.QUOTE_ALL)
+    c = csv.writer(file_result, delimiter=';', quoting=csv.QUOTE_ALL)
     c.writerow(header)
     for d in data:
         c.writerow(d)
@@ -54,7 +55,7 @@ def write_file_dict(filename, header, data):
 
 def read_file_dict(file_name, id_name):
     file_ref = open(file_name, 'r')
-    reader = UnicodeReader(file_ref, delimiter=';')
+    reader = csv.reader(file_ref, delimiter=';')
 
     head = reader.next()
     res = {}

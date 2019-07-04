@@ -15,7 +15,7 @@ You should have received a copy of the GNU Lesser General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from xmlrpclib import Fault
+from xmlrpc.client import Fault
 from time import time
 from itertools import islice, chain
 
@@ -23,13 +23,13 @@ from itertools import islice, chain
 import sys
 import csv
 
-from lib import conf_lib
-from lib.conf_lib import log_error, log_info
-from lib.internal.rpc_thread import RpcThread
-from lib.internal.csv_reader import UnicodeWriter
+from .lib import conf_lib
+from .lib.conf_lib import log_error, log_info
+from .lib.internal.rpc_thread import RpcThread
+from .lib.internal.csv_reader import UnicodeWriter
 from odoo_csv_tools.lib.internal.io import ListWriter
 
-csv.field_size_limit(sys.maxint)
+csv.field_size_limit(sys.maxsize)
 
 
 def batch(iterable, size):
@@ -104,6 +104,3 @@ def export_data(config_file, model, domain, header, context=None, output=None, m
         return False, False
     else:
         return writer.header, writer.data
-
-
-

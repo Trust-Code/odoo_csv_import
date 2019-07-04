@@ -1,8 +1,8 @@
 """
     Mapper
 """
-from internal.tools import to_m2m, to_m2o
-from internal.exceptions import SkippingException
+from .internal.tools import to_m2m, to_m2o
+from .internal.exceptions import SkippingException
 import base64
 import os
 
@@ -209,7 +209,7 @@ def database_id_mapper_fallback_create(connection, model, *fields_mapper, **kwar
             if rec and rec[0]['res_id']:
                 return str(rec[0]['res_id'])
             else:
-                print "import"
+                print("import")
                 connection.get_model(model).load(['id', 'name'], [[res, res]], context={'tracking_disable' : True, 'create_product_variant' : True,})
                 return database_id_mapper_fun(line)
         if skip:

@@ -3,7 +3,8 @@ Created on 16 mai 2014
 
 @author: openerp
 '''
-import csv, codecs, cStringIO
+import csv, codecs
+from io import StringIO
 import threading
 
 class UTF8Recoder:
@@ -26,11 +27,11 @@ class UnicodeReader:
     """
 
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
-        f = UTF8Recoder(f, encoding)
+        # f = UTF8Recoder(f, encoding)
         self.reader = csv.reader(f, dialect=dialect, **kwds)
 
     def next(self):
-        row = self.reader.next()
+        row = self.reader
         return [unicode(s, "utf-8") for s in row]
 
     def __iter__(self):
@@ -45,7 +46,7 @@ class UnicodeWriter:
 
     def __init__(self, f, dialect=csv.excel, encoding="utf-8", **kwds):
         # Redirect output to a queue
-        self.queue = cStringIO.StringIO()
+        self.queue = StringIO()
         self.writer = csv.writer(self.queue, dialect=dialect, **kwds)
         self.stream = f
         self.encoder = codecs.getincrementalencoder(encoding)()

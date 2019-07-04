@@ -21,15 +21,15 @@ import csv
 
 from time import time
 from itertools import islice, chain
-from xmlrpclib import Fault
+from xmlrpc.client import Fault
 
-from lib import conf_lib
-from lib.conf_lib import log_error, log_info, log
-from lib.internal.rpc_thread import RpcThread
-from lib.internal.io import ListWriter
-from lib.internal.csv_reader import UnicodeReader, UnicodeWriter
+from .lib import conf_lib
+from .lib.conf_lib import log_error, log_info, log
+from .lib.internal.rpc_thread import RpcThread
+from .lib.internal.io import ListWriter
+from .lib.internal.csv_reader import UnicodeReader, UnicodeWriter
 
-csv.field_size_limit(sys.maxint)
+csv.field_size_limit(sys.maxsize)
 
 
 def batch(iterable, size):
@@ -133,6 +133,7 @@ def read_file(file_to_read, delimiter=';', encoding='utf-8-sig', skip=0):
         return new_header
 
     def check_id_column(header):
+        print(header)
         try:
             header.index('id')
         except ValueError as ve:
@@ -220,4 +221,3 @@ def import_data(config_file, model, header=None, data=None, file_csv=None, conte
         return False, False
     else:
         return writer.header, writer.data
-
